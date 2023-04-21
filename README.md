@@ -1,9 +1,9 @@
 "# projectVideotv" 
 
-# WEBSITE Film with MERN
-<h1>Project Film : VIDEO TV </h1>
+# Website Film With Mern
+<h1>Project Name : VIDEO TV </h1>
 <p>FrontEnd : ReactJS  with TypeScript</p>
-<p>Back End: NodeJs</p>
+<p>BackEnd: NodeJs</p>
 <p>Database: MongoDB</p>
 
 <h2>Getting started</h2>
@@ -12,6 +12,19 @@
 <p>Forder movie: yarn dev</p>
 <p>Forder backend: npm start</p>
 
+ <h2>DESCRIPTION</h2>
+<ul>
+ <li>FireBase: Login, Logout, Register</li>
+ <li>PayPal Donate</li>
+ <li>Search</li>
+ <li>BookMark</li>
+ <li>Commemts</li>
+ <li>Upload avata with Base64</li>
+ <li>Filter</li>
+ <li>View Profie</li>
+ <li>Slider</li>
+
+</ul>
 <h2>PAGE DETAILS</h2>
 <ul>
     <li>
@@ -61,16 +74,3 @@
     </li>
 </ul>
 
- <h2>DESCRIPTION</h2>
-<ul>
- <li>FireBase Login,Logout,Register</li>
- <li>PayPal Donate</li>
- <li>Search</li>
- <li>BookMark</li>
- <li>Commemts</li>
- <li>Upload avata with Base64</li>
- <li>Filter</li>
- <li>View Profie</li>
- <li>Slider</li>
-
-</ul>
