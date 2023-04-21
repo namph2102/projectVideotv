@@ -127,6 +127,7 @@ class UserController {
         (idUser &&
           (await UserModel.findById({ _id: idUser })
             .populate("nameLevel")
+            .populate("icons")
             .select(
               "fullname nameLevel username _id expLv icons expVip permission vip avata"
             ))) ||
