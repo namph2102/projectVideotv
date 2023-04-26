@@ -9,10 +9,10 @@ const FimlModel = new Shema(
     description: { type: String, required: true },
     thumb_url: { type: String, required: true },
     poster_url: { type: String, required: true },
-    category: { type: Array, default: [] },
-    // category: [
-    //   { type: mongoose.Schema.Types.ObjectId, ref: "categories", default: [] },
-    // ],
+    // category: { type: Array, default: [] },
+    category: [
+      { type: mongoose.Schema.Types.ObjectId, ref: "categories", default: [] },
+    ],
     kind: { type: String, default: "feature" },
     status: { type: String, default: "completed" },
     view: { type: Number, default: 0 },
@@ -20,12 +20,17 @@ const FimlModel = new Shema(
     year: { type: Number, default: 2023 },
     time: { type: String, default: "" },
     like: { type: Number, default: 0 },
-    country: { type: mongoose.Schema.Types.ObjectId, ref: "countries" },
+    country: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "countries",
+      require: true,
+    },
     trailer: { type: Boolean, default: false },
     episode_current: { type: Number, default: 0 },
-    eposode_total: { type: Number, default: 1 },
+    eposode_total: { type: Number, default: 0 },
     quanlity: { type: String, default: "HD" },
     lang: { type: String, default: "VietSub" },
+    block: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

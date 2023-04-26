@@ -1,12 +1,42 @@
 const UserModel = require("../models/UserModel");
 const ExpLevel = require("../models/ExpLvModel");
+const expVipModel = require("../models/ExpVipModel");
 const fs = require("fs");
-
+const path = require("path");
 class UserUpdate {
+  async updateVip(idUser, expBonus) {
+    try {
+      const account = await UserModel.findOneAndUpdate(
+        { _id: idUser },
+        { $inc: { expVip: expBonus, coin: expBonus } }
+      ).select("");
+
+      const levelNext = await expVipModel.find({
+        musty: { $lt: account.coin + expBonus },
+      });
+      const item = (levelNext && levelNext.at(-1)) || "";
+
+      if (item && account.coin + expBonus >= item.musty) {
+        if (account.permission !== "admin") {
+          await UserModel.findOneAndUpdate(
+            { _id: idUser },
+            { vip: item.level, permission: "vip" }
+          );
+        } else {
+          await UserModel.findOneAndUpdate(
+            { _id: idUser },
+            { vip: item.level }
+          );
+        }
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
   async updateExp(username, point) {
     try {
       if (!point) {
-        point = Math.ceil(Math.random() * 20);
+        point = point == 0 ? 0 : Math.ceil(Math.random() * 20);
       }
       if (username) {
         const user = await UserModel.findOneAndUpdate(
@@ -32,7 +62,11 @@ class UserUpdate {
   async removeImage(link) {
     try {
       if (!link) throw new Error("Thiếu đường link tuyệt đối");
-      const fiexedLink = link.replace(process.env.DOMAIN, "");
+      const fiexedLink =
+        path.join(__dirname).replace("app\\utils", "public\\") +
+        link.replace(process.env.DOMAIN, "");
+      console.log("file cũ là", fiexedLink);
+
       if (!fs.existsSync(fiexedLink)) {
         throw new Error("file dont have directoty");
       }
@@ -44,6 +78,26 @@ class UserUpdate {
     } catch (err) {
       console.log(err.message);
     }
+  }
+  replaceManySpace(str) {
+    if (!str) return "";
+    return str.replace(/  +/g, " ").trim();
+  }
+  coverCapitalize(str) {
+    if (typeof str === "string") {
+      str = str.replace(/  +/g, " ").trim().toLowerCase();
+      return str
+        .split(" ")
+        .map((chart) => chart[0].toUpperCase() + chart.slice(1))
+        .join(" ");
+    } else {
+      return "";
+    }
+  }
+  plusLinkImage(link) {
+    if (!link) return "";
+    console.log(link);
+    return process.env.DOMAIN + "uploads/" + link;
   }
 }
 module.exports = new UserUpdate();

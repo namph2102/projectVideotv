@@ -5,14 +5,14 @@
 <p>FrontEnd : ReactJS  with TypeScript</p>
 <p>BackEnd: NodeJs</p>
 <p>Database: MongoDB</p>
-
+<p><a href="https://github.com/namph2102/filmReactjs" target="_blank">Link Github Movie (FrontEnd)</a></p>
 <h2>Getting started</h2>
 <hr>
 <h3>Run website</h3>
-<p>Forder movie: yarn dev</p>
+<p>Forder movie: yarn dev </p>
 <p>Forder backend: npm start</p>
 
- <h2>DESCRIPTION</h2>
+ <h2>Description</h2>
 <ul>
  <li>FireBase: Login, Logout, Register</li>
  <li>PayPal Donate</li>
@@ -20,9 +20,9 @@
  <li>BookMark</li>
  <li>Commemts</li>
  <li>Upload avata with Base64</li>
- <li>Filter</li>
  <li>View Profie</li>
  <li>Slider</li>
+
 
 </ul>
 <h2>PAGE DETAILS</h2>

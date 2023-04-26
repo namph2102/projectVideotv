@@ -5,6 +5,7 @@ const {
   authResgisther,
   authLogin,
   Authorization,
+  AuthenzationAdmin,
 } = require("../app/Authorization");
 
 // path parent /user
@@ -15,8 +16,9 @@ Routers.get("/login", authLogin)
   .post("/information", UserController.getInformation)
   .post("/updateProfile", Authorization, UserController.updateProfile)
   .post("/updateAvatar", UserController.updateAvatarUser)
-  .post("/block", Authorization, UserController.blockUser)
+  .post("/block", UserController.blockUser)
   .post("/changePassword", Authorization, UserController.changePassword)
-  .post("/getListUserRank", UserController.getListUserRank);
+  .post("/getListUserRank", UserController.getListUserRank)
+  .post("/deleteUser", AuthenzationAdmin, UserController.deleUser);
 
 module.exports = Routers;

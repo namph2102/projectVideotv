@@ -2,12 +2,17 @@ const FimlsModel = require("../models/FimlModel");
 const CategoryModel = require("../models/CategoryModel");
 const CountryModel = require("../models/CountryModel");
 const Bonus = require("../utils/UserUtil");
+const FimlDeltailModel = require("../models/FimlDeltailModel");
+const StarModel = require("../models/StarModel");
+const CommentModel = require("../models/CommemtModel");
+const BookMarkModel = require("../models/BookMarkModel");
+const Utils = require("../utils/UserUtil");
 class FimlController {
   async init(req, res) {
     try {
-      const listfilms = await FimlsModel.find({})
-        .select("name slug _id origin_name thumb_url")
-        .lean();
+      const listfilms = await FimlsModel.find({ block: false }).select(
+        "name slug _id origin_name thumb_url"
+      );
       res.status(200).json({
         status: 200,
         message: "OK",
@@ -24,7 +29,7 @@ class FimlController {
   }
   async getBanners(_, res) {
     try {
-      const listfilms = await FimlsModel.find()
+      const listfilms = await FimlsModel.find({ block: false })
         .sort({ view: -1 })
         .limit(6)
         .select("name _id origin_name poster_url slug");
@@ -43,7 +48,7 @@ class FimlController {
   }
   async showHome(_, res) {
     try {
-      const listfilms = await FimlsModel.find()
+      const listfilms = await FimlsModel.find({ block: false })
         .sort({ updated_at: -1 })
         .limit(20);
       res.status(200).json({
@@ -61,10 +66,10 @@ class FimlController {
   }
   async showKind(_, res) {
     try {
-      const resfeature = FimlsModel.find({ kind: "feature" })
+      const resfeature = FimlsModel.find({ kind: "feature", block: false })
         .sort({ view: -1 })
         .limit(6);
-      const resseries = FimlsModel.find({ kind: "series" })
+      const resseries = FimlsModel.find({ kind: "series", block: false })
         .sort({ view: -1 })
         .limit(6);
       const [feature, series] = await Promise.all([resfeature, resseries]);
@@ -85,7 +90,9 @@ class FimlController {
     try {
       const { slug } = req.body;
       if (!slug) throw new Error("Can't find slug");
-      const film = await FimlsModel.findOne({ slug });
+      const film = await FimlsModel.findOne({ slug })
+        .populate("category")
+        .populate("country");
 
       if (film) {
         return res.status(200).json({
@@ -152,10 +159,12 @@ class FimlController {
         case "the-loai":
           console.log(slug);
           if (slug) {
-            const findCate = await CategoryModel.findOne({ slug });
+            const findCate = await CategoryModel.findOne({
+              slug,
+            });
             if (findCate) {
               subName = findCate.category;
-              options = { category: { $in: [subName] } };
+              options = { category: { $in: [findCate._id] } };
             } else {
               listResultPromise = [0, []];
             }
@@ -182,8 +191,8 @@ class FimlController {
       }
 
       const [countFilm, listFilm] = await Promise.all([
-        FimlsModel.find(options).count(),
-        FimlsModel.find(options)
+        FimlsModel.find({ ...options, block: false }).count(),
+        FimlsModel.find({ ...options, block: false })
           .skip(skip)
           .limit(filmInPage)
           .sort({ view: -1 }),
@@ -201,6 +210,7 @@ class FimlController {
     try {
       const { limit, category } = req.body.data;
       const result = await FimlsModel.find({
+        block: false,
         category: { $in: category },
       })
         .sort({ view: -1 })
@@ -237,6 +247,75 @@ class FimlController {
       console.log(resFilm.view);
     } catch (err) {
       res.status(404).json({ message: err.message });
+    }
+  }
+  async getAll(req, res) {
+    try {
+      const listFilm = await FimlsModel.find({})
+        .sort({ updatedAt: -1 })
+        .populate("category")
+        .populate("country");
+      const listRating =
+        (await StarModel.aggregate([
+          {
+            $group: {
+              _id: "$idFilm",
+              sumstar: { $sum: "$star" },
+            },
+          },
+        ])) || [];
+
+      res.status(200).json({
+        listFilm,
+        message: "oke get list film success",
+        status: 200,
+        listRating,
+      });
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+  async blockFilm(req, res) {
+    try {
+      const { idFilm, block } = req.body;
+      console.log(req.body);
+      const film = await FimlsModel.findByIdAndUpdate(
+        { _id: idFilm },
+        { block }
+      );
+      if (!film) throw new Error("Thao tác thất bại!");
+      res
+        .status(200)
+        .json({ message: `${block ? "Khóa" : "Mở khóa"} thành công !` });
+    } catch (err) {
+      res.status(404).json({ message: err.message });
+      console.log(err.message);
+    }
+  }
+  async deleteFilm(req, res) {
+    try {
+      const { idFilm } = req.body;
+      console.log(req.body);
+      const film = await FimlsModel.findByIdAndDelete({ _id: idFilm });
+
+      await Promise.all([
+        Utils.removeImage(film.thumb_url),
+        Utils.removeImage(film.poster_url),
+      ]);
+      await BookMarkModel.updateMany(
+        {},
+        { listBookmark: { $pull: { slug: film.slug } } }
+      );
+      await Promise.all([
+        CommentModel.deleteMany({ id_film: idFilm }),
+        StarModel.deleteMany({ idFilm }),
+        FimlDeltailModel.deleteOne({ idFilm }),
+      ]);
+      if (!film) throw new Error("Thao tác thất bại!");
+      res.status(200).json({ message: `Xóa thành công` });
+    } catch (err) {
+      res.status(404).json({ message: err.message });
+      console.log(err.message);
     }
   }
 }

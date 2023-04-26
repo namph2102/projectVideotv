@@ -25,7 +25,7 @@ class CommemtController {
       })
         .populate({ path: "user_comment" })
         .limit(limit)
-        .sort({ updated_at: -1 });
+        .sort({ updatedAt: -1 });
 
       listCommemt = await CommemtController.getListIconSub(listCommemt);
       if (listCommemt.length > 0) {
@@ -92,7 +92,7 @@ class CommemtController {
           _id: { $in: [...dataParent.subcomment, newComment.id] },
         })
           .populate("user_comment")
-          .sort({ updated_at: -1 });
+          .sort({ updatedAt: -1 });
         allSubcommemt = await CommemtController.getListIconSub(allSubcommemt);
         return res.json({
           status: 200,
@@ -197,7 +197,7 @@ class CommemtController {
       const commemt = req.body.data.comment;
       await CommemtModel.updateOne(
         { _id },
-        { comment: commemt, updated_at: Date.now(), is_edit: true }
+        { comment: commemt, is_edit: true }
       );
       return res
         .status(200)

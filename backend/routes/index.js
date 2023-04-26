@@ -7,7 +7,10 @@ const FilmDetailRouter = require("./FilmDetailRouter");
 const BookmarkRouter = require("./BookmarkRouter");
 const ExpRotuer = require("./expRouter");
 const TopUpRouter = require("./TopUpRouter");
+const CategoryRouter = require("./CategoryRouter");
 
+//
+const adminRouter = require("./AdminRouter");
 function AllRouter(app) {
   app.use("/api", FilmRouter);
   app.use("/comments", CommemtRouter);
@@ -18,5 +21,7 @@ function AllRouter(app) {
   app.use("/bookmark", BookmarkRouter);
   app.use("/exp", ExpRotuer);
   app.use("/topup", TopUpRouter);
+  app.use("/category", CategoryRouter);
+  app.use("/", adminRouter);
 }
 module.exports = AllRouter;

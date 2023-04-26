@@ -7,6 +7,11 @@ const argon2 = require("argon2");
 const uniqid = require("uniqid");
 const path = require("path");
 const UserUpdate = require("../utils/UserUtil");
+
+const CommentModel = require("../models/CommemtModel");
+const TopUpModel = require("../models/TopupModel");
+const BookMarkModel = require("../models/BookMarkModel");
+
 class UserController {
   async login(req, res) {
     try {
@@ -122,14 +127,27 @@ class UserController {
   }
   async getListUserRank(req, res) {
     try {
-      const { idUser } = req.body.data;
+      const { idUser, getall } = req.body.data;
+
+      if (getall) {
+        // admin page user;
+        const listUser = await UserModel.find()
+          .sort({ expLv: -1 })
+          .populate("nameLevel")
+          .populate("icons");
+
+        res
+          .status(200)
+          .json({ listUser, message: "All list user admin", status: 200 });
+        return;
+      }
       const account =
         (idUser &&
           (await UserModel.findById({ _id: idUser })
             .populate("nameLevel")
             .populate("icons")
             .select(
-              "fullname nameLevel username _id expLv icons expVip permission vip avata"
+              "fullname nameLevel username _id expLv icons expVip permission vip avata createdAt updatedAt"
             ))) ||
         "";
 
@@ -138,7 +156,7 @@ class UserController {
         .populate("nameLevel")
         .populate("icons")
         .select(
-          "fullname nameLevel username _id expLv icons expVip permission vip avata"
+          "fullname nameLevel username _id expLv icons expVip permission vip avata createdAt"
         );
       res.status(200).json({ listUser, account });
     } catch (err) {
@@ -146,15 +164,26 @@ class UserController {
     }
   }
   async updateProfile(req, res) {
+    console.log(req.body.data);
     try {
-      const { fullname, phone, description, _id } = req.body.data;
+      const {
+        fullname = "",
+        phone = "",
+        description = "",
+        _id,
+      } = req.body.data;
       if (!_id) {
         throw new Error("id is not found in profile");
       }
-      const account = await UserModel.findByIdAndUpdate(
+
+      await UserModel.findOneAndUpdate(
         { _id },
         { fullname, phone, description }
       );
+      const account = await UserModel.findById({ _id }).select(
+        "fullname phone description"
+      );
+      if (!account) throw new Error("không tìm thấy");
       res.status(200).json({
         status: 200,
         success: true,
@@ -192,8 +221,8 @@ class UserController {
   }
   async blockUser(req, res) {
     try {
-      console.log(req.body.data);
       const { _id, blocked } = req.body.data;
+      console.log(req.body.data);
       await UserModel.findByIdAndUpdate({ _id }, { blocked });
       res.status(200).json({
         status: 200,
@@ -204,6 +233,25 @@ class UserController {
     } catch (err) {
       console.log(err.message);
       res.status(200).json({ status: 200, message: "Thao tác block thất bại" });
+    }
+  }
+  async deleUser(req, res) {
+    try {
+      const { _id } = req.body.data;
+      console.log("Xóa ID USer", _id);
+
+      if (!_id) throw new Error("ID không tồn tại !");
+      const account = await UserModel.findByIdAndDelete({ _id });
+      if (!account) throw new Error("Tài khoản không tồn tại !");
+      await Promise.all([
+        UserUpdate.removeImage(account.avata),
+        CommentModel.deleteMany({ user_comment: _id }),
+        TopUpModel.deleteMany({ account: _id, status: 3 }),
+        BookMarkModel.deleteMany({ username: account.username }),
+      ]);
+      res.status(200).json({ message: "Xóa thành công user" });
+    } catch (err) {
+      res.status(404).json({ message: err.message });
     }
   }
   async changePassword(req, res) {

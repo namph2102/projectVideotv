@@ -75,11 +75,15 @@ const authLogin = (req, res) => {
 
 const Authorization = async (req, res, next) => {
   try {
-    if (req.body.data.permission === "admin") {
-      next();
-      return;
-    }
     const username = req.body.data.username;
+    const account = await UserModel.findOne({ username });
+    if (account) {
+      if (account?.permission == "admin") {
+        next();
+        return;
+      }
+    }
+
     const token = req.headers["authorization"];
     if (!token) {
       throw new Error("Invalid");
@@ -107,4 +111,60 @@ const Authorization = async (req, res, next) => {
     });
   }
 };
-module.exports = { authResgisther, authLogin, Authorization };
+// phân quyền cho trang admin
+const AuthorizationAdmin = async (req, res, next) => {
+  try {
+    console.log("AuthorizationAdmin");
+    if (req?.cookies?.username) {
+      console.log("Your username của bạn là :", req.cookies.username);
+      const account = await UserModel.findOne({
+        username: req.cookies.username,
+      });
+      if (account) {
+        if (account.permission == "admin") {
+          next();
+          return;
+        } else {
+          throw new Error("Bạn không có quyền truy cập trang này !");
+        }
+      }
+      throw new Error("Tài khoản của bạn không tồn tại  !");
+    }
+    throw new Error("Bạn chưa đăng nhập !");
+  } catch (err) {
+    res.render("login", { layout: false });
+  }
+};
+// xác thực
+const AuthenzationAdmin = async (req, res, next) => {
+  try {
+    console.log("Xác thực người dùng của trang admin");
+    if (req?.cookies?.username) {
+      console.log("Your username của bạn là :", req.cookies.username);
+      const account = await UserModel.findOne({
+        username: req.cookies.username,
+      });
+      if (account) {
+        if (account.permission == "admin") {
+          next();
+          return;
+        } else {
+          throw new Error("Bạn không có quyền Thay đổi dữ liệu !");
+        }
+      }
+      throw new Error("Tài khoản của bạn không tồn tại  !");
+    }
+    throw new Error(2);
+  } catch (err) {
+    if (err.message == 2) {
+      res.redirect("/");
+    } else res.status(404).json({ message: err.message });
+  }
+};
+module.exports = {
+  authResgisther,
+  authLogin,
+  Authorization,
+  AuthorizationAdmin,
+  AuthenzationAdmin,
+};

@@ -2,7 +2,22 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const path = require("path");
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
+
 const port = 3000;
+const { engine } = require("express-handlebars");
+
+// sử dụng view engine
+app.engine(".hbs", engine({ extname: ".hbs" }));
+app.set("view engine", ".hbs");
+app.set("views", "./views");
+
+//Khai báo sử dụng middleware cookieParse()
+// admin
+app.use(cookieParser());
+
+// cookie;
 app.use(
   express.urlencoded({
     type: "application/x-www-form-urlencoded",
@@ -18,9 +33,8 @@ app.use(express.static(path.join(__dirname, "public")));
 require("dotenv").config();
 
 const ConnectDB = require("./config");
-const casual = require("casual");
+
 const AllRouter = require("./routes");
-const jwt = require("jsonwebtoken");
 
 ConnectDB()
   .then(() => {
@@ -29,33 +43,6 @@ ConnectDB()
   .catch(() => {
     console.log("Cant Connection Database Successfully");
   });
-// const books = [
-//   {
-//     id: 1,
-//     title: casual.title,
-//   },
-//   {
-//     id: 2,
-//     title: casual.title,
-//   },
-//   {
-//     id: 3,
-//     title: casual.title,
-//   },
-// ];
-// function authToken(req, res, next) {
-//   const authriaztion = req.headers["authorization"];
-//   // Bearer ['token']
-//   const token = authriaztion.split(" ")[1];
-//   jwt.verify(token, process.env.ACCESS_TOKEN_SRCRET, (err, data) => {
-//     if (err) return res.sendStatus(403);
-//     next();
-//   });
-// }
-
-// app.get("/books", authToken, (req, res) => {
-//   res.status(200).json({ sucess: "oke", data: books });
-// });
 
 AllRouter(app);
 

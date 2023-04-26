@@ -1,5 +1,7 @@
 const StarModel = require("../models/StarModel");
 const FilmModel = require("../models/FimlModel");
+const UserModel = require("../models/UserModel");
+const UserUtil = require("../utils/UserUtil");
 class StarController {
   static async CalcAverage(idFilm) {
     try {
@@ -49,12 +51,12 @@ class StarController {
   async addStar(req, res) {
     try {
       const { idFilm, star, useID } = req.body.data;
+      if (useID) {
+        const account = await UserModel.findOne({ _id: useID });
+        UserUtil.updateExp(account.username, Math.floor(star));
+      }
+      await FilmModel.findByIdAndUpdate({ _id: idFilm }, { $inc: { star: 1 } });
 
-      const resfilm = await FilmModel.findByIdAndUpdate(
-        { _id: idFilm },
-        { $inc: { star: 1 } }
-      );
-      console.log(resfilm);
       await StarModel.create({ idFilm, star, useID });
       const average = await StarController.CalcAverage(idFilm);
       return new Promise((resolve) => {

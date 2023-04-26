@@ -106,7 +106,7 @@ Content-Type: application/json
 }
 
 
-###
+### add icon
 POST http://localhost:3000/icon/addIconTouser
 Content-Type: application/json
 
@@ -114,5 +114,17 @@ Content-Type: application/json
  "data":{
     "idIcon":"643df81b68bded922ee08353",
     "idUser":"643e0f08a0c5f14b512d40dc"
+ }
+}
+
+
+                
+### add category
+POST http://localhost:3000/category/addcate
+Content-Type: application/json
+
+{
+ "data":{
+    "category":"                   Bí Ẩn "
  }
 }

@@ -3,35 +3,6 @@ const TopUpModel = require("../models/TopupModel");
 const expVipModel = require("../models/ExpVipModel");
 const UserUtil = require("../utils/UserUtil");
 class TopUpController {
-  static async updateVip(idUser, expBonus) {
-    try {
-      const account = await UserModel.findOneAndUpdate(
-        { _id: idUser },
-        { $inc: { expVip: expBonus, coin: expBonus } }
-      ).select("");
-
-      const levelNext = await expVipModel.find({
-        musty: { $lt: account.coin + expBonus },
-      });
-      const item = (levelNext && levelNext.at(-1)) || "";
-
-      if (item && account.coin + expBonus >= item.musty) {
-        if (account.permission !== "admin") {
-          await UserModel.findOneAndUpdate(
-            { _id: idUser },
-            { vip: item.level, permission: "vip" }
-          );
-        } else {
-          await UserModel.findOneAndUpdate(
-            { _id: idUser },
-            { vip: item.level }
-          );
-        }
-      }
-    } catch (err) {
-      console.lof(err.message);
-    }
-  }
   async TopUp(req, res) {
     console.log("Gửi request nạp thẻ");
     try {
@@ -61,7 +32,7 @@ class TopUpController {
       if (status == 2) {
         // nạp paypal thành công
         const expBonus = Math.floor(money / 100);
-        await TopUpController.updateVip(idUser, expBonus);
+        await UserUtil.updateVip(idUser, expBonus);
         await UserUtil.updateExp(username, expBonus);
       }
       const account = await UserModel.findById({ _id: idUser }).select(
