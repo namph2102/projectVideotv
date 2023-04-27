@@ -4,6 +4,12 @@ const expVipModel = require("../models/ExpVipModel");
 const fs = require("fs");
 const path = require("path");
 class UserUpdate {
+  async updateCokkieClient(res, value, timeExpires = 3600 * 100 * 9999) {
+    res.cookie("_idLogin", value, {
+      expires: new Date(Date.now() + timeExpires),
+    });
+  }
+
   async updateVip(idUser, expBonus) {
     try {
       const account = await UserModel.findOneAndUpdate(

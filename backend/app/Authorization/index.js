@@ -22,7 +22,6 @@ const authResgisther = async (req, res) => {
         accessToken,
         refreshToken,
       });
-
       return res.status(200).json({
         data: data,
         status: 200,
@@ -51,7 +50,6 @@ const authLogin = (req, res) => {
             { username: account.username },
             process.env.ACCESS_TOKEN_SECRET
           );
-
           const data = await UserModel.findOneAndUpdate(
             {
               username: account.username,

@@ -204,9 +204,9 @@ class UserController {
       } else UserUpdate.removeImage(checkAccount.avata);
 
       const filename = uniqid() + ".png";
-      const filepath = path.join("public", "images", filename);
+      const filepath = path.join("public", "uploads", filename);
       var base64Data = avata.replace(/^data:image\/png;base64,/, "");
-      const linkavata = process.env.DOMAIN + filepath;
+      const linkavata = UserUpdate.plusLinkImage(filename);
       fs.writeFile(filepath, base64Data, "base64", async function (err) {
         if (err) throw new Error("Upload ảnh không thành công");
         console.log(linkavata);

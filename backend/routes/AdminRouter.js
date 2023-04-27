@@ -67,4 +67,5 @@ router
   .get("/*", (req, res) => {
     res.render("pagenotfound", { layout: false });
   });
+module.exports = { upload };
 module.exports = router;
