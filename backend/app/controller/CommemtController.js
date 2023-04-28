@@ -75,7 +75,6 @@ class CommemtController {
         user_comment: id_user,
         comment,
         id_film,
-        updated_at: Date.now(),
       });
       if (subcomment) {
         //nếu là commem bậc 2 thì
@@ -158,6 +157,7 @@ class CommemtController {
   async handleDeletecommemt(req, res) {
     try {
       const _id = req.body.data.idcommemt;
+      console.log(req.body.data);
       await CommemtModel.updateMany(
         {},
         { $pull: { subcomment: { $in: [_id] } } }

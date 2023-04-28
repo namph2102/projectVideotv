@@ -126,7 +126,6 @@ header {
 .scroll_settings {
   transform: translate3d(0, 0, 0);
   overflow: auto;
-  overscroll-behavior: none;
 }
 .scroll_settings::-webkit-scrollbar {
   width: 4px;
@@ -184,6 +183,8 @@ button {
   width: 100%;
   background-color: var(--bg--second);
   border-radius: 12px;
+}
+.paginationjs .paginationjs-pages {
   padding: 8px 0;
 }
 .paginationjs li {

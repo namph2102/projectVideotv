@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Authorization } = require("../app/Authorization");
+const { Authorization, AuthenzationAdmin } = require("../app/Authorization");
 const CommentController = require("../app/controller/CommemtController");
 // path parent /comments
 router.post("/list", CommentController.init);
@@ -15,6 +15,12 @@ router.post(
   Authorization,
   CommentController.handleDeletecommemt
 );
+router.post(
+  "/admin/delete",
+  AuthenzationAdmin,
+  CommentController.handleDeletecommemt
+);
+
 router.put(
   "/user/update",
   Authorization,

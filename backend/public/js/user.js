@@ -49,7 +49,7 @@ const renderSearchItem = (valueSearch) => {
     )
     .map(
       (item) => `<li>
-<a class="block p-1 hover:bg-slate-950" href="/catelog/additem?idFilm=${item._id}">
+<a class="block p-1 hover:bg-slate-950" href="/user/edituser/${item._id}">
   <figure class="flex gap-x-2">
       <img src="${item.avata}" width="40" height="80" class="object-cover" >
       <figcaption>
@@ -195,9 +195,10 @@ const renderList = (dataSource) => {
 };
 // renderDataView modal view
 const renderDataView = (user) => {
+  console.log(user);
   const html = `  <h6 class="text-center pb-4 text-2xl">Account Detail</h6>
   <figure class="flex flex-col items-center mb-4">
-    <a href="http://">
+    <a href="/user/edituser/${user._id}">
       <img
         class="w-[50px] object-cover h-[50px] rounded-full"
         src="${user.avata}"
@@ -224,7 +225,7 @@ const renderDataView = (user) => {
         </div>
       </div>
     </div>
-    <div class="${user.icons.length == 0 && "hidden"} ">
+    <div">
       <div class="px-2">Icons:</d>
       <div class="flex flex-wrap gap-2 my-2">
       ${user.icons
@@ -378,7 +379,6 @@ tableContainer.addEventListener("click", function (e) {
               buttonelement.title = account.blocked ? "Mở khóa" : "Khóa";
               buttonelement.classList.toggle("lock");
             } else {
-              console.log(data);
               e.target.closest("tr").classList.add("hidden");
               console.log(e.target.closest("tr"));
               const findIndex = listUser.findIndex((item) => item._id === id);

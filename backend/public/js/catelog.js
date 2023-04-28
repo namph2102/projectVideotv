@@ -128,11 +128,16 @@ const renderList = (dataSource, listRating) => {
             <td>
                 <div class="px-2 whitespace-nowrap">${film.view}</div>
             </td>
+            <td>
+            <div class="px-2 whitespace-nowrap">${film.episode_current} / ${
+            film.eposode_total
+          }</div>
+        </td>
             <td><div class="whitespace-nowrap">${dateFormat(
               film.updatedAt
             )}</div></td>
             <td class="btn_actions">
-                <div class="min-w-[160px] actions_list-btn" data-id="${
+                <div class="min-w-[200px] actions_list-btn" data-id="${
                   film._id
                 }" >
                     <button title=${
@@ -142,13 +147,15 @@ const renderList = (dataSource, listRating) => {
                     </button>
                     <button  class="btn_view">
                         <i class="fa-solid fa-eye"></i>
-                    </button>          
+                    </button>  
+                    <a  class="block_btn-film"  href="/catelog/showEsopide/${
+                      film._id
+                    }">
+                     <button ><i class="fa-solid fa-film"></i></button></a>
                    <a  class="block_btn-edit"  href="/catelog/additem?idFilm=${
                      film._id
                    }">
-                    <button >
-                   <i class="fa-solid fa-pencil"></i>
-               </button></a>
+                    <button > <i class="fa-solid fa-pencil"></i></button></a>
                     <button class="btn_delete">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
@@ -241,6 +248,22 @@ const renderDataView = (film) => {
                   )}" />
               </div>
           </div>
+          <div>
+          <span class="px-2">Esopide Current:</span>
+          <div>
+              <input class="input_style w-full" readonly value="${coverNumber(
+                film.episode_current
+              )}" />
+          </div>
+      </div>
+      <div>
+      <span class="px-2">Esopide Total:</span>
+      <div>
+          <input class="input_style w-full" readonly value="${coverNumber(
+            film.eposode_total
+          )}" />
+      </div>
+  </div>
           <div>
               <span class="px-2">time:</span>
               <div>

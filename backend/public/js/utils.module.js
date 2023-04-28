@@ -1,8 +1,8 @@
 export const btnFilterSort = document.getElementById("btn_filter");
 export const sortContainer = document.getElementById("sort_container");
-btnFilterSort.addEventListener("click", function () {
+btnFilterSort?.addEventListener("click", function () {
   this.classList.toggle("btn_close");
-  sortContainer.classList.toggle("hideElement");
+  sortContainer?.classList.toggle("hideElement");
 });
 export const listItem_container = document.querySelector("#listItem_container");
 export const btnSearch = document.getElementById("btn_search");

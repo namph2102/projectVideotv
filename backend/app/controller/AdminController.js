@@ -2,6 +2,8 @@ const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/UserModel");
 const FimlModel = require("../models/FimlModel");
+const FimlDeltailModel = require("../models/FimlDeltailModel");
+
 const CommentModel = require("../models/CommemtModel");
 const IconModel = require("../models/IconModel");
 const moment = require("moment");
@@ -16,9 +18,7 @@ const argon = require("argon2");
 const makeUpNumber = (number = 0) => {
   return number ? number.toLocaleString("en-vi") : 0;
 };
-class ApiController {
-  getCatelog() {}
-}
+
 class AdminController {
   async init(req, res) {
     try {
@@ -138,6 +138,8 @@ class AdminController {
       res.status(404).json({ message: err.message, status: 404 });
     }
   }
+
+  // film
   async PageCateLog(req, res) {
     res.render("cate/catelog", { catelog: true, title: "CateLog" });
   }
@@ -173,6 +175,7 @@ class AdminController {
         year,
         country,
         kind,
+        eposode_total,
         status,
         quanlity,
         lang,
@@ -240,6 +243,7 @@ class AdminController {
         kind: kind == "trailer" ? "feature" : kind,
         trailer: kind == "trailer",
         status,
+        eposode_total,
         quanlity,
         lang,
         thumb_url: thumb,
@@ -346,7 +350,36 @@ class AdminController {
       res.render("login", { layout: false, username, errors: err.message });
     }
   }
+  async showAddEsopide(req, res) {
+    try {
+      const { idFilm } = req.body;
+      if (idFilm) {
+        const infoEsopide = (await FimlDeltailModel.findOne({ idFilm })) || "";
+        if (infoEsopide) {
+          res.status(200).json({ infoEsopide });
+          return;
+        }
+      }
+      const { _id } = req.params;
+      const film = await FimlModel.findById({ _id })
+        .select("name updatedAt view thumb_url")
+        .lean();
+      if (!_id || !film) {
+        throw new Error("Không tìm thấy thông tin");
+      }
 
+      film.updatedAt = moment(film.updatedAt).format("DD/MM/YYYY - HH:mm:ss");
+      res.render("cate/addEsopide", { catelog: true, film });
+    } catch (err) {
+      console.log(err.message);
+      res.status(404).json({ err: err.message });
+    }
+  }
+  async addEsopide(req, res) {
+    console.log(req.body);
+    const { listEsopideEmbeded } = req.body;
+    console.log(listEsopideEmbeded.split("*"));
+  }
   //user
   async showUser(req, res) {
     res.render("user", { user: true });
@@ -453,6 +486,38 @@ class AdminController {
       res
         .status(200)
         .json({ status: 200, message: "Thay đổi mật khẩu mới thành công !" });
+    } catch (err) {
+      console.log(err.message);
+      res.status(404).json({ message: err.message });
+    }
+  }
+  // get comment and topupuser
+  async getInfomationAccount(req, res) {
+    try {
+      const { idUser } = req.body;
+      const listcomment =
+        (await CommentModel.find({
+          user_comment: idUser,
+        }).populate({
+          path: "user_comment",
+          select: "fullname _id username permission avata",
+        })) || [];
+      const listTopup =
+        (await TopUpModel.find({
+          account: idUser,
+        })
+          .sort({ status: 1 })
+          .populate({
+            path: "account",
+            select: "fullname _id username permission avata",
+          })) || [];
+
+      res.status(200).json({
+        listcomment,
+        listTopup,
+        status: 200,
+        message: "Lấy thành công list topup and list comment",
+      });
     } catch (err) {
       console.log(err.message);
       res.status(404).json({ message: err.message });

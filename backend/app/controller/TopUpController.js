@@ -61,5 +61,54 @@ class TopUpController {
       console.log(err.message);
     }
   }
+  async handleTopUpPageAdmin(req, res) {
+    try {
+      const { idTopup, status } = req.body;
+      let message = "";
+      if (!idTopup || !status) {
+        throw new Error("Dữ liệu bị thiếu");
+      }
+      const infomation = await TopUpModel.findOneAndUpdate(
+        { _id: idTopup },
+        { status }
+      ).populate({ path: "account", select: "username  _id" });
+      if (!infomation | !infomation?.account) {
+        throw new Error("Không tìm thấy thông tin nạp!");
+      }
+      const { username, _id } = infomation.account;
+      if (status == 2) {
+        const expBonus = Math.floor(infomation.money / 100);
+        console.log(expBonus);
+        await Promise.all([
+          UserUtil.updateExp(username, expBonus),
+          UserUtil.updateVip(_id, expBonus),
+        ]);
+
+        message = "Thanh Toán nạp  này thành công!";
+      } else {
+        message = "Thanh toán này đã bị thất bại!";
+      }
+      const account =
+        (await UserModel.findOne({ _id }).select("coin vip expLv")) || {};
+      res.status(200).json({ message, account });
+    } catch (err) {
+      console.log(err.message);
+      res.status(404).json({ message: err.message, status: 404 });
+    }
+  }
+  async deleteTopUp(req, res) {
+    try {
+      const { idTopup } = req.params;
+      const result = await TopUpModel.findByIdAndDelete({ _id: idTopup });
+      if (!result) {
+        throw new Error("Không tồn tại hóa đơn nạp này!");
+      }
+      res
+        .status(200)
+        .json({ message: "Xóa thành công hóa đơn nạp!", status: 200 });
+    } catch (err) {
+      res.status(404).json({ message: err.message, status: 404 });
+    }
+  }
 }
 module.exports = new TopUpController();

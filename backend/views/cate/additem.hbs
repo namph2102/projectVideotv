@@ -63,7 +63,9 @@
                 <input required type="text" class="input_style" value="{{year}}" placeholder="Year" name="year" />
                 <input required type="text" class="input_style capitalize" value="{{country.country}}"
                     placeholder="Country" name="country" />
-
+                <input required type="text" class="input_style capitalize"
+                    value="{{#if eposode_total}}{{eposode_total}}{{else}}1{{/if}}" placeholder="TotalEsopide"
+                    name="eposode_total" />
             </div>
             <div class="grid lg:grid-cols-4 grid-cols-2 gap-2">
                 <select required name="kind" class="input_style cursor-pointer" id="kind">

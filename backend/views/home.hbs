@@ -167,7 +167,7 @@
         <table class="w-full text-center  ">
             <thead>
                 <tr class="text-lg text-gray-400 font-bold">
-                    <td>Pay Code</td>
+                    <td>ID</td>
                     <td>Kind</td>
                     <td>Money</td>
                     <td>CreateAt</td>
@@ -177,7 +177,7 @@
                 {{#each TopUp}}
                 <tr>
                     <td class="  max-w-[60px] overflow-auto scroll_with-none ">
-                        <div class="mx-2"> {{this._id}}</div>
+                        <div class="mx-2"> #{{this._id}}</div>
                     </td>
                     <td>
                         <div class="min-w-[120px] capitalize"> {{#if this.nameWallet}} {{ this.nameWallet}} {{else}} {{

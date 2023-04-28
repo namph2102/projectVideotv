@@ -41,6 +41,22 @@ router
     AdminController.AddFiml
   )
   .post("/category/delete", AuthenzationAdmin, AdminController.deleteCategory);
+
+// router.get("/catelog/viewesopide",)
+
+router
+  .get(
+    "/catelog/showEsopide/:_id",
+    AuthenzationAdmin,
+    AdminController.showAddEsopide
+  )
+  .post(
+    "/catelog/showEsopide",
+    AuthenzationAdmin,
+    AdminController.showAddEsopide
+  )
+  .post("/catelog/addEsopide", AdminController.addEsopide);
+
 router.post("/checkaccount", AdminController.checkAccount);
 
 router
@@ -57,6 +73,11 @@ router
     "/user/admin/changePassword",
     AuthenzationAdmin,
     AdminController.changePassword
+  )
+  .post(
+    "/user/admin/getinfomation",
+    AuthenzationAdmin,
+    AdminController.getInfomationAccount
   );
 
 router
