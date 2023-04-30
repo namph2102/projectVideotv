@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const AdminController = require("../app/controller/AdminController");
-
+const CountryController = require("../app/controller/CountryController");
+const Categorycontroller = require("../app/controller/Categorycontroller");
+const IconController = require("../app/controller/IconsController");
 const {
   AuthorizationAdmin,
   AuthenzationAdmin,
@@ -60,8 +62,8 @@ router
 router.post("/checkaccount", AdminController.checkAccount);
 
 router
-  .get("/user", AdminController.showUser)
-  .get("/user/edituser/:id", AdminController.showUserEdit)
+  .get("/user", AuthenzationAdmin, AdminController.showUser)
+  .get("/user/edituser/:id", AuthenzationAdmin, AdminController.showUserEdit)
   .post(
     "/user/edituser/:id",
     AuthenzationAdmin,
@@ -79,10 +81,45 @@ router
     AuthenzationAdmin,
     AdminController.getInfomationAccount
   );
+router
+  .get("/topup/show", AuthenzationAdmin, AdminController.ShowTopUp)
+  .get("/topup/show/:id", AuthenzationAdmin, AdminController.ShowTopUp)
+  .post("/topup/show", AuthenzationAdmin, AdminController.ShowTopUp);
+
+router
+  .get("/comment/show", AuthenzationAdmin, AdminController.showComment)
+  .post("/comment/show", AuthenzationAdmin, AdminController.showComment);
+
+router
+  .get("/country/show", AuthenzationAdmin, CountryController.init)
+  .get("/country/getall", AuthenzationAdmin, CountryController.getDataCountry)
+  .post("/country/show", AuthenzationAdmin, CountryController.adminAddCountry)
+  .delete("/country/:id", AuthenzationAdmin, CountryController.deleteCountry);
+
+// category
+router
+  .get("/category/show", AuthenzationAdmin, Categorycontroller.showCategory)
+  .post("/category/edit", AuthenzationAdmin, Categorycontroller.editCate)
+  .delete("/category/:id", AuthenzationAdmin, Categorycontroller.deleteCate);
+
+// icon
+router
+  .get("/icon/show", AuthenzationAdmin, IconController.showIconAdmin)
+  .post("/icon/show", AuthenzationAdmin, IconController.showIconAdmin)
+  .delete("/icon/delete/:id", AuthenzationAdmin, IconController.deleteIcon);
 
 router
   .get("/login", (req, res) => {
     res.render("login", { layout: false });
+  })
+  .get("/admin/logout", (req, res) => {
+    try {
+      res.clearCookie("username");
+      res.clearCookie("refreshToken");
+      res.redirect("/");
+    } catch (err) {
+      res.redirect("/");
+    }
   })
   //Page not found 404
   .get("/*", (req, res) => {

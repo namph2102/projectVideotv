@@ -12,28 +12,7 @@
     <figure class="mb-3">
         <a href="/"> <img class="max-w-[200px]" src="/images/logo.png" alt="" /></a>
     </figure>
-    <section class="border-y-[0.5px] border-gray-600 py-4">
-        <div class="flex justify-between">
-            <figure class="flex gap-2">
-                <img class="w-10 h-10 object-cover rounded-xl" id="header_avata" src="/images/ixv44kklgnim7ve.png"
-                    alt="" />
-                <figcaption>
-                    <p id="header_permission"
-                        class="max-w-[100px] capitalize text-ellipsis overflow-hidden whitespace-nowrap">
-                        Admin
-                    </p>
-                    <p id="header_fullname"
-                        class="max-w-[100px] capitalize text-ellipsis overflow-hidden whitespace-nowrap">Hoài Nam</p>
-                </figcaption>
-            </figure>
-            <a href="/logout">
-                <button
-                    class="hover:bg-white hover:text-black ease-in duration-150 rounded-lg py-2 px-3 bg-gray-600 text-white">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                </button>
-            </a>
-        </div>
-    </section>
+
     <nav class="nav_menu">
         <ul>
             <li>
@@ -56,48 +35,61 @@
                 </a>
             </li>
             <li>
-                <a href="xxxxx">
+                <a class="{{#if topup}}active{{/if}}" href="/topup/show">
                     <i class="fa-solid fa-coins"></i>
                     <span>Top Up </span>
                 </a>
             </li>
             <li>
-                <a href="xxxxx">
+                <a class="{{#if country}}active{{/if}}" href="/country/show">
                     <i class="fa-solid fa-earth-oceania"></i>
                     <span>Country</span>
                 </a>
             </li>
             <li>
-                <a href="xxxxx">
+                <a class="{{#if category}}active{{/if}}" href="/category/show">
                     <i class="fa-solid fa-book"></i>
                     <span>Category</span>
                 </a>
             </li>
             <li>
-                <a href="xxxxx">
+                <a class="{{#if icon}}active{{/if}}" href="/icon/show">
                     <i class="fa-solid fa-icons"></i>
                     <span>Icon</span>
                 </a>
             </li>
             <li>
-                <a href="xxxxx">
+                <a class="{{#if comment}}active{{/if}}" href="/comment/show">
                     <i class="fa-regular fa-comment"></i>
                     <span>Comment</span>
                 </a>
             </li>
         </ul>
     </nav>
+    <section id="info_admin" class="border-y-[0.5px] border-gray-600 py-4 hideElement ease-in duration-300">
+        <div class="flex justify-between">
+            <figure class="flex gap-2">
+                <img class="w-10 h-10 object-cover rounded-xl" id="header_avata" src="/images/ixv44kklgnim7ve.png"
+                    alt="" />
+                <figcaption>
+                    <p id="header_permission"
+                        class="max-w-[100px] capitalize text-ellipsis overflow-hidden whitespace-nowrap">
+                        Admin
+                    </p>
+                    <p id="header_fullname"
+                        class="max-w-[100px] capitalize  text-sm text-ellipsis overflow-hidden whitespace-nowrap">Hoài
+                        Nam</p>
+                </figcaption>
+            </figure>
+            <a href="/admin/logout">
+                <button
+                    class="hover:bg-white hover:text-black ease-in duration-150 rounded-lg py-2 px-3 bg-gray-600 text-white">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
+            </a>
+        </div>
+    </section>
 </header>
 <!-- end Header -->
 
-<script>
-    fetch("/user/admin/login").then(res => res.json()).then(data => {
-        const { fullname, permission, avata } = data.account;
-        document.getElementById("header_permission").innerHTML = permission;
-        document.getElementById("header_fullname").innerHTML = fullname;
-        document.getElementById("header_avata").src = avata;
-
-
-
-    })
-</script>
+<script type="module" src="/js/header.js"></script>

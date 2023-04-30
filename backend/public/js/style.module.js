@@ -37,7 +37,6 @@ class ToastMessage {
 }
 export const average = (total, Amount) => {
   if (!Amount || !total) return 5;
-  console.log(total, Amount);
   const avgerage = total / Amount + "";
   if (avgerage.includes(".")) {
     return Number(avgerage).toFixed(2);

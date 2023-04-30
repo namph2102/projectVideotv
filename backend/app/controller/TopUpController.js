@@ -71,7 +71,7 @@ class TopUpController {
       const infomation = await TopUpModel.findOneAndUpdate(
         { _id: idTopup },
         { status }
-      ).populate({ path: "account", select: "username  _id" });
+      ).populate({ path: "account", select: "username  _id avata fullname" });
       if (!infomation | !infomation?.account) {
         throw new Error("Không tìm thấy thông tin nạp!");
       }

@@ -132,7 +132,7 @@ class AdminController {
           return;
         }
       }
-      throw new Error("Không tìm thấy tài khoản nào login vào admin!");
+      throw new Error("Bạn chưa đăng nhập nhé!");
     } catch (err) {
       console.log(err.message);
       res.status(404).json({ message: err.message, status: 404 });
@@ -521,6 +521,70 @@ class AdminController {
     } catch (err) {
       console.log(err.message);
       res.status(404).json({ message: err.message });
+    }
+  }
+  // show top up
+  async ShowTopUp(req, res) {
+    try {
+      const { getdata } = req.body;
+      const { id } = req.params;
+      if (getdata) {
+        const listTopup =
+          (await TopUpModel.find().sort({ status: 1 }).populate({
+            path: "account",
+            select: "username  _id avata fullname",
+          })) || [];
+
+        res.status(200).json({
+          message: "Lấy thành công danh sách nạp!",
+          listTopup,
+          id,
+        });
+
+        return;
+      }
+      const [{ sumMoney }] = await TopUpModel.aggregate([
+        {
+          $match: {
+            status: 2,
+          },
+        },
+        {
+          $group: {
+            _id: null,
+            sumMoney: { $sum: "$money" },
+          },
+        },
+      ]);
+      let total = 0;
+      if (sumMoney) {
+        total = sumMoney.toLocaleString("en-vi");
+      }
+      res.render("topup", { topup: true, total, id: id || "" });
+    } catch (err) {
+      console.log(err.message);
+      res.render("pagenotfound", { layout: false });
+    }
+  }
+
+  // show comment page comment
+
+  async showComment(req, res) {
+    try {
+      const { getAll } = req.body;
+      if (getAll) {
+        const listComments =
+          (await CommentModel.find().sort({ total_like: -1 }).populate({
+            path: "user_comment",
+            select: "_id fullname username createdAt updatedAt avata",
+          })) || [];
+        res.status(200).json({ listComments });
+        return;
+      }
+      const total = await CommentModel.find().count();
+      res.render("comment", { comment: true, total });
+    } catch (err) {
+      console.log(err.message);
     }
   }
 }

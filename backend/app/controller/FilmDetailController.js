@@ -15,6 +15,18 @@ class FilmDetailController {
       const dataupdate = { episode_current: maxTotal };
       if (film.eposode_total < maxTotal) {
         dataupdate.eposode_total = maxTotal;
+        if (maxTotal > 1) {
+          dataupdate.kind = "series";
+        } else {
+          dataupdate.kind = "feature";
+        }
+      }
+      if (
+        infoFilm.listEsopideStream.length != infoFilm.listEsopideEmbeded.length
+      ) {
+        dataupdate.episode_current = "uncompleted";
+      } else {
+        dataupdate.episode_current = "completed";
       }
       await FilmModel.updateOne({ _id: idFilm }, dataupdate);
     } catch (err) {

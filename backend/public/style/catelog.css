@@ -62,3 +62,6 @@
 button i {
   cursor: pointer;
 }
+.tr_active {
+  background-color: #585c33 !important;
+}
