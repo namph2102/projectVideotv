@@ -57,7 +57,7 @@ class FimlController {
         data: listfilms,
       });
     } catch (err) {
-      res.stauts(404).json({
+      res.status(404).json({
         status: 404,
         message: "Fall to get value view home ",
         data: [],

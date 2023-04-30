@@ -18,11 +18,12 @@
  <li>PayPal Donate</li>
  <li>Search</li>
  <li>BookMark</li>
- <li>Commemts</li>
+ <li>Comment</li>
+  <li>Pagination</li>
  <li>Upload avata with Base64</li>
  <li>View Profie</li>
  <li>Slider</li>
-
+  <li>Auth</li>
 
 </ul>
 <h2>PAGE DETAILS</h2>
@@ -72,5 +73,18 @@
     <li>
         More and more Pages Let's  discover 
     </li>
+    <li>
+     <p>Admin DashBoard</p>
+        <img src="/readme/admin.png"/>
+        <img src="/readme/admin1.png"/>
+        <img src="/readme/admin2.png"/>
+        <img src="/readme/admin3.png"/>
+        <img src="/readme/admin4.png"/>
+        <img src="/readme/admin5.png"/>
+        <img src="/readme/admin6.png"/>
+        <img src="/readme/admin7.png"/>
+    </li>
 </ul>
+
+
 
