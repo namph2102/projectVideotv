@@ -24,7 +24,7 @@
  <li>View Profie</li>
  <li>Slider</li>
   <li>Auth</li>
-
+  <li>Redux, Redux Toolkit, Redux Thunk</li>
 </ul>
 <h2>PAGE DETAILS</h2>
 <ul>
