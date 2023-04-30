@@ -8,11 +8,13 @@ class FilmDetailController {
       }).select("listEsopideStream listEsopideEmbeded");
 
       const maxTotal = Math.max(
-        infoFilm.listEsopideStream.length || 0,
-        infoFilm.listEsopideEmbeded.length || 0
+        infoFilm.listEsopideStream?.length || 0,
+        infoFilm.listEsopideEmbeded?.length || 0
       );
       const film = await FilmModel.findOne({ _id: idFilm });
-      const dataupdate = { episode_current: maxTotal };
+      const dataupdate = {};
+      dataupdate.episode_current = Number(maxTotal) || 0;
+
       if (film.eposode_total < maxTotal) {
         dataupdate.eposode_total = maxTotal;
         if (maxTotal > 1) {
@@ -34,6 +36,7 @@ class FilmDetailController {
       console.log("Upload tập phim thất bại");
     }
   }
+
   async init(req, res) {
     const slug = req.body.slug;
     console.log(slug);
@@ -62,7 +65,7 @@ class FilmDetailController {
         let coverembed;
         coverM3u8 = m3u8;
         coverembed = embed;
-        console.log(coverM3u8, coverembed);
+
         await FimlDeltailModel.updateOne(
           { idFilm },
           {

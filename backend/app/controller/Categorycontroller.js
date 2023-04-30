@@ -59,7 +59,7 @@ class CategoryController {
   async showCategory(req, res) {
     try {
       res.render("category", {
-        category: true,
+        categorypage: true,
         total: 12,
       });
     } catch (err) {}

@@ -7,7 +7,7 @@ class CountryController {
   async init(req, res) {
     try {
       const total = await ContryModel.find().count();
-      res.render("country", { country: true, total });
+      res.render("country", { countrypage: true, total });
     } catch (err) {
       console.log(err.message);
     }

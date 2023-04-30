@@ -141,7 +141,7 @@ class AdminController {
 
   // film
   async PageCateLog(req, res) {
-    res.render("cate/catelog", { catelog: true, title: "CateLog" });
+    res.render("cate/catelog", { catelogpage: true, title: "CateLog" });
   }
   async showAdd(req, res) {
     try {
@@ -155,12 +155,12 @@ class AdminController {
       }
 
       res.render("cate/additem", {
-        catelog: true,
+        catelogpage: true,
         title: "Edit film ",
         ...film,
       });
     } catch (err) {
-      res.render("cate/additem", { catelog: true, title: "Add New Film " });
+      res.render("cate/additem", { catelogpage: true, title: "Add New Film " });
     }
   }
   async AddFiml(req, res) {
@@ -176,6 +176,7 @@ class AdminController {
         country,
         kind,
         eposode_total,
+        episode_current,
         status,
         quanlity,
         lang,
@@ -243,7 +244,8 @@ class AdminController {
         kind: kind == "trailer" ? "feature" : kind,
         trailer: kind == "trailer",
         status,
-        eposode_total,
+        eposode_total: eposode_total || 1,
+        episode_current: episode_current || 1,
         quanlity,
         lang,
         thumb_url: thumb,
@@ -285,7 +287,7 @@ class AdminController {
         .lean();
       if (film) {
         res.render("cate/additem", {
-          catelog: true,
+          catelogpage: true,
           title: "Edit film",
           message,
           ...film,
@@ -295,7 +297,7 @@ class AdminController {
       }
     } catch (err) {
       res.render("cate/additem", {
-        catelog: true,
+        catelogpage: true,
         title: "Add New Film",
         error: err.message,
       });
@@ -369,7 +371,7 @@ class AdminController {
       }
 
       film.updatedAt = moment(film.updatedAt).format("DD/MM/YYYY - HH:mm:ss");
-      res.render("cate/addEsopide", { catelog: true, film });
+      res.render("cate/addEsopide", { catelogpage: true, film });
     } catch (err) {
       console.log(err.message);
       res.status(404).json({ err: err.message });

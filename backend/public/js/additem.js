@@ -10,11 +10,11 @@ const thumbimg = document.getElementById("thumbimg");
 const posterimg = document.getElementById("posterimg");
 
 thumb.addEventListener("change", function (e) {
-  validatorImage(e, thumbimg, 500);
+  validatorImage(e, thumbimg, 1000);
 });
 
 poster.addEventListener("change", function (e) {
-  validatorImage(e, posterimg, 500);
+  validatorImage(e, posterimg, 1500);
 });
 fetch("/category")
   .then((res) => res.json())

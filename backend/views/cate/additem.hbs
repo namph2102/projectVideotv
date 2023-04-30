@@ -1,5 +1,14 @@
 <section class="flex flex-wrap items-center justify-between border-gray-600 border-b-[0.5px] pb-4 mb-3">
     <h1 class="text-3xl font-semibold">{{title}}</h1>
+    {{#if _id}}
+    <a href="/catelog/showEsopide/{{_id}}" class="text-sm">
+        <button
+            class="py-2 px-3 rounded-xl bg-blue-700 text-gray-100 hover:bg-white hover:text-black ease-linear duration-100">
+            Add Esopide
+        </button>
+    </a>
+    {{/if}}
+
 </section>
 <section>
     {{#if error}}
@@ -60,12 +69,24 @@
             </div>
             <div class="grid lg:grid-cols-4 grid-cols-2 gap-2">
                 <input required type="text" class="input_style" value="{{time}}" placeholder="Time" name="time" />
-                <input required type="text" class="input_style" value="{{year}}" placeholder="Year" name="year" />
+                <input required type="number" class="input_style" value="{{year}}" placeholder="Year" name="year" />
                 <input required type="text" class="input_style capitalize" value="{{country.country}}"
                     placeholder="Country" name="country" />
-                <input required type="text" class="input_style capitalize"
-                    value="{{#if eposode_total}}{{eposode_total}}{{else}}1{{/if}}" placeholder="TotalEsopide"
-                    name="eposode_total" />
+
+            </div>
+            <div class="grid lg:grid-cols-4 grid-cols-2 gap-2 {{#if episode_current}} {{else}}hideElement {{/if}}">
+                <div>
+                    <label for="eposode_total">Total Esopide</label>
+                    <input required type="number" id="eposode_total" class="input_style capitalize"
+                        value="{{#if eposode_total}}{{eposode_total}}{{else}}1{{/if}}" placeholder="Total Esopide"
+                        name="eposode_total" />
+                </div>
+                <div>
+                    <label for="episode_current">Esopide Current</label>
+                    <input required type="number" id="episode_current" class="input_style capitalize"
+                        value="{{#if episode_current}}{{episode_current}}{{else}}0{{/if}}" placeholder="Esopide current"
+                        name="episode_current" />
+                </div>
             </div>
             <div class="grid lg:grid-cols-4 grid-cols-2 gap-2">
                 <select required name="kind" class="input_style cursor-pointer" id="kind">
@@ -85,7 +106,7 @@
                     {{else}}
                     <option value="completed">Status</option>
                     {{/if}}
-                    <option value="completed">Status</option>
+
                     <option value="completed">Hoàn thành</option>
                     <option value="uncompeleted">Chưa hoàn thành</option>
                 </select>
@@ -124,7 +145,7 @@
         <div class="basis-full text-center">
             <button type="submit"
                 class="py-2 px-3 rounded-xl bg-blue-700 text-gray-100 hover:bg-white hover:text-black ease-linear duration-100 sm:w-[200px] w-4/5">
-                PUSLISH
+                {{#if _id}}Edit{{else}}Create{{/if}}
             </button>
         </div>
     </form>

@@ -60,7 +60,12 @@ formAdd.addEventListener("submit", function (e) {
       });
   }
 });
+function replaceManySpace(str) {
+  if (!str) return "";
+  return str.replace(/  +/g, " ").trim();
+}
 function CoverToListEsopide(valueListTextarea, kind) {
+  valueListTextarea = replaceManySpace(valueListTextarea);
   if (!valueListTextarea.includes("|")) {
     return false;
   }
@@ -77,7 +82,7 @@ function CoverToListEsopide(valueListTextarea, kind) {
         return false;
       }
       const [es, link] = esopide.split("|");
-      return { esopide: `Tập ${es}`, link };
+      return { esopide: `Tập ${Number(es)}`, link };
     });
   } else if (valueListTextarea.includes("|")) {
     const [es, link] = valueListTextarea.split("|");
@@ -129,6 +134,7 @@ const displayEditView = (formEditOne) => {
 
 // render view Dataview
 const renderDataView = (item) => {
+  console.log(item);
   const html = `
   <h6 class="text-center pb-4 text-2xl">Edit Esopide</h6>
   <form class="lg:min-w-[600px]" id="editOne">
@@ -275,7 +281,7 @@ const renderListEsopideContainer = () => {
     .then((data) => {
       if (data.infoEsopide) {
         const { listEsopideEmbeded, listEsopideStream } = data.infoEsopide;
-
+        console.log(listEsopideEmbeded);
         const max = Math.max(
           listEsopideEmbeded.length || 0,
           listEsopideStream.length || 0
@@ -334,8 +340,11 @@ listItem_container.addEventListener("click", (e) => {
           });
       };
     } else if (buttonElement.classList.contains("btn_edit")) {
-      const item = fullLink.find((_, i) => i == index);
-      renderDataView(item);
+      const findItem = fullLink.find(
+        (item, i) => item.idm3u8 == idm3u8 && item.idembed == idembed
+      );
+      console.log(findItem);
+      renderDataView(findItem);
     }
   }
 });
