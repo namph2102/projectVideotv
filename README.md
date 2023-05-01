@@ -14,17 +14,20 @@
 
  <h2>Description</h2>
 <ul>
- <li>FireBase: Login, Logout, Register</li>
+  <li>CRUD user, film, category, country, icon, comment</li>
+    <li>Responsive</li>
+ <li>FireBase: Login, Logout, Register (JWT)</li>
  <li>PayPal Donate</li>
  <li>Search</li>
  <li>BookMark</li>
- <li>Comment</li>
+ <li>Comment (Realtime)</li>
   <li>Pagination</li>
  <li>Upload avata with Base64</li>
  <li>View Profie</li>
  <li>Slider</li>
   <li>Auth</li>
   <li>Redux, Redux Toolkit, Redux Thunk</li>
+
 </ul>
 <h2>PAGE DETAILS</h2>
 <ul>
@@ -83,6 +86,7 @@
         <img src="/readme/admin5.png"/>
         <img src="/readme/admin6.png"/>
         <img src="/readme/admin7.png"/>
+        <img src="/readme/admin8.png"/>
     </li>
 </ul>
 
