@@ -9,7 +9,7 @@
 <h2>Getting started</h2>
 <hr>
 <h3>Run website</h3>
-<p>Forder movie: yarn dev </p>
+<p>Forder movie: (git clone "https://github.com/namph2102/filmReactjs" .) -> yarn dev </p>
 <p>Forder backend: npm start</p>
 
  <h2>Description</h2>
