@@ -11,36 +11,34 @@
 
 #### Run website
  
- `Forder Parent git clone https://github.com/namph2102/projectVideotv .`
- `Forder movie: git clone "https://github.com/namph2102/filmReactjs"  -> yarn dev`
- `Forder backend: npm start`
- `Create .env and copy code`
- 
+ 1. Forder Parent git clone https://github.com/namph2102/projectVideotv .
+ 2. Forder movie: git clone "https://github.com/namph2102/filmReactjs"  -> yarn dev
+ 3. Create .env and copy code
+ 4. Forder backend: npm start
    <code>MONGODB_URL= "mongodb://127.0.0.1:27017/movies"
       ACCESS_TOKEN_SECRET = "namhoai"
    REFRESH_TOKEN_SECRET = "hoainam"
    FISEBASE_PASSWORD="saobietduoc"
-   DOMAIN = "http://localhost:3000/"
-   <code>
-
+   DOMAIN = "http://localhost:3000/"<code>
+ 
 
  ### Description
-<ul>
-  <li>CRUD user, film, category, country, icon, comment</li>
-    <li>Responsive</li>
- <li>FireBase: Login, Logout, Register (JWT)</li>
- <li>PayPal Donate</li>
- <li>Search</li>
- <li>BookMark</li>
- <li>Comment (Realtime)</li>
-  <li>Pagination</li>
- <li>Upload avata with Base64</li>
- <li>View Profie</li>
- <li>Slider</li>
-  <li>Auth</li>
-  <li>Redux, Redux Toolkit, Redux Thunk</li>
 
-</ul>
+  - CRUD user, film, category, country, icon, comment
+  - Responsive
+  - FireBase: Login, Logout, Register (JWT)
+  - PayPal Donate
+  - Search
+  - BookMark
+  - Comment (Realtime)
+  - Pagination
+  - Upload avata with Base64
+  - View Profie
+  - Slider
+  - Auth
+  - Redux, Redux Toolkit, Redux Thunk
+
+
 
 ### PAGE DETAILS
 <ul>
