@@ -36,13 +36,7 @@ const ConnectDB = require("./config");
 
 const AllRouter = require("./routes");
 
-ConnectDB()
-  .then(() => {
-    console.log("Connection Database Successfully");
-  })
-  .catch(() => {
-    console.log("Cant Connection Database Successfully");
-  });
+ConnectDB();
 
 AllRouter(app);
 
