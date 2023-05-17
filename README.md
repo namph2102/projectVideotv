@@ -19,7 +19,6 @@
    REFRESH_TOKEN_SECRET = "hoainam"
    FISEBASE_PASSWORD="saobietduoc"
    DOMAIN = "http://localhost:3000/"<code></p>
-
  ### Description
   - CRUD user, film, category, country, icon, comment
   - Responsive
@@ -35,9 +34,8 @@
   - Auth
   - Redux, Redux Toolkit, Redux Thunk
 ### PAGE DETAILS
-<ul>
-    <li>
-        <p>HOME</p>
+
+ 1. Home 
         <figure>
         <img src="/readme/home.png"/>
         <img src="/readme/home1.png"/>
@@ -46,43 +44,35 @@
         <img src="/readme/home4.png"/>
         <img src="/readme/home5.png"/>
         </figure>
-    </li>
-    <li>
-        <p>Film Detail</p>
+
+    2. Film Detail
         <figure>
              <img src="/readme/filmdetail.png"/>
                  <img src="/readme/filmdetail1.png"/>
         </figure>
-    </li>
-    <li>
-        <p>Watch Film</p>
+
+   3. Watch Film
         <figure>
              <img src="/readme/sewwfilm.png"/>
             <img src="/readme/seefilm1.png"/>
              <img src="/readme/comment.png"/>
         </figure>
-    </li>
-      <li>
-        <p>Page follow Countries or Categories or kind and more</p>
+    4. Page follow Countries or Categories or kind and more
         <figure>
-             <img src="/readme/showallfilm.png"/>
-            <img src="/readme/seeall.png"/>
-             <img src="/readme/pagecontry.png"/>
+        <img src="/readme/showallfilm.png"/>
+        <img src="/readme/seeall.png"/>
+        <img src="/readme/pagecontry.png"/>
         </figure>
-    </li>
-    <li>
-        <p>Profle</p>
+    5. Profle
         <figure>
              <img src="/readme/profile.png"/>
             <img src="/readme/profile2.png"/>
              <img src="/readme/profileq.png"/>
         </figure>
-    </li>
-    <li>
-        More and more Pages Let's  discover 
-    </li>
-    <li>
-     <p>Admin DashBoard</p>
+  
+    6. More and more Pages Let's  discover 
+        ......
+    7. Admin DashBoard
         <img src="/readme/admin.png"/>
         <img src="/readme/admin1.png"/>
         <img src="/readme/admin2.png"/>
@@ -92,8 +82,8 @@
         <img src="/readme/admin6.png"/>
         <img src="/readme/admin7.png"/>
         <img src="/readme/admin8.png"/>
-    </li>
-</ul>
+ 
+
 
 
 
