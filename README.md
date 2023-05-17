@@ -13,14 +13,11 @@
  1. Forder Parent git clone https://github.com/namph2102/projectVideotv .
  2. Forder movie: git clone "https://github.com/namph2102/filmReactjs"  -> yarn dev
  3. Create .env and copy code
-
-  `         MONGODB_URL= "mongodb://127.0.0.1:27017/movies"
-            ACCESS_TOKEN_SECRET = "namhoai"
-            REFRESH_TOKEN_SECRET = "hoainam"
-            FISEBASE_PASSWORD="saobietduoc" 
-            DOMAIN = "http://localhost:3000/" 
-  `
-
+    - MONGODB_URL= "mongodb://127.0.0.1:27017/movies"  
+    - ACCESS_TOKEN_SECRET = "namhoai" 
+    - REFRESH_TOKEN_SECRET = "hoainam"
+    - FISEBASE_PASSWORD="saobietduoc" 
+    - DOMAIN = "http://localhost:3000/"
   4. Forder backend: npm start
 
  ## Description
