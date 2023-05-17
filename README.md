@@ -16,11 +16,12 @@
  `Forder backend: npm start`
  `Create .env and copy code`
  
- `MONGODB_URL= "mongodb://127.0.0.1:27017/movies"`
- `ACCESS_TOKEN_SECRET = "namhoai"`
- `REFRESH_TOKEN_SECRET = "hoainam"`
- `FISEBASE_PASSWORD="saobietduoc"`
- `DOMAIN = "http://localhost:3000/"`
+   <code>MONGODB_URL= "mongodb://127.0.0.1:27017/movies"
+      ACCESS_TOKEN_SECRET = "namhoai"
+   REFRESH_TOKEN_SECRET = "hoainam"
+   FISEBASE_PASSWORD="saobietduoc"
+   DOMAIN = "http://localhost:3000/"
+   <code>
 
 
  ### Description
