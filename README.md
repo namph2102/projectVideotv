@@ -7,7 +7,6 @@
  - Database: MongoDB
  - [Link Github Movie (FrontEnd)](https://github.com/namph2102/filmReactjs) 
 ### Getting started
-<hr>
 
 #### Run website
  
@@ -15,15 +14,13 @@
  2. Forder movie: git clone "https://github.com/namph2102/filmReactjs"  -> yarn dev
  3. Create .env and copy code
  4. Forder backend: npm start
-   <code>MONGODB_URL= "mongodb://127.0.0.1:27017/movies"
+  <p> <code>MONGODB_URL= "mongodb://127.0.0.1:27017/movies"
       ACCESS_TOKEN_SECRET = "namhoai"
    REFRESH_TOKEN_SECRET = "hoainam"
    FISEBASE_PASSWORD="saobietduoc"
-   DOMAIN = "http://localhost:3000/"<code>
- 
+   DOMAIN = "http://localhost:3000/"<code></p>
 
  ### Description
-
   - CRUD user, film, category, country, icon, comment
   - Responsive
   - FireBase: Login, Logout, Register (JWT)
@@ -37,9 +34,6 @@
   - Slider
   - Auth
   - Redux, Redux Toolkit, Redux Thunk
-
-
-
 ### PAGE DETAILS
 <ul>
     <li>
