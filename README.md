@@ -14,11 +14,13 @@
  2. Forder movie: git clone "https://github.com/namph2102/filmReactjs"  -> yarn dev
  3. Create .env and copy code
  4. Forder backend: npm start
-  <p> <code>MONGODB_URL= "mongodb://127.0.0.1:27017/movies"
-      ACCESS_TOKEN_SECRET = "namhoai"
+  <p><code>
+   MONGODB_URL= "mongodb://127.0.0.1:27017/movies"
+   ACCESS_TOKEN_SECRET = "namhoai"
    REFRESH_TOKEN_SECRET = "hoainam"
    FISEBASE_PASSWORD="saobietduoc"
    DOMAIN = "http://localhost:3000/"<code></p>
+
  ### Description
   - CRUD user, film, category, country, icon, comment
   - Responsive
@@ -33,6 +35,7 @@
   - Slider
   - Auth
   - Redux, Redux Toolkit, Redux Thunk
+  
 ### PAGE DETAILS
    1. Home 
         <img src="/readme/home.png"/>
