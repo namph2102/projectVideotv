@@ -24,7 +24,7 @@
   4. Forder backend: npm start
 
  ## Description
-  - CRUD user, film, category, country, icon, comment
+  - **CRUD** User, Film, Category, Country, Icon, Comment
   - Responsive
   - FireBase: Login, Logout, Register (JWT)
   - PayPal Donate
