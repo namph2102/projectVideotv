@@ -8,9 +8,20 @@
  - [Link Github Movie (FrontEnd)](https://github.com/namph2102/filmReactjs) 
 ### Getting started
 <hr>
-<h3>Run website</h3>
-<p>Forder movie: (git clone "https://github.com/namph2102/filmReactjs" .) -> yarn dev </p>
-<p>Forder backend: npm start</p>
+
+#### Run website
+ 
+ `Forder Parent git clone https://github.com/namph2102/projectVideotv .`
+ `Forder movie: git clone "https://github.com/namph2102/filmReactjs"  -> yarn dev`
+ `Forder backend: npm start`
+ `Create .env and copy code`
+ 
+ `MONGODB_URL= "mongodb://127.0.0.1:27017/movies"`
+ `ACCESS_TOKEN_SECRET = "namhoai"`
+ `REFRESH_TOKEN_SECRET = "hoainam"`
+ `FISEBASE_PASSWORD="saobietduoc"`
+ `DOMAIN = "http://localhost:3000/"`
+
 
  ### Description
 <ul>
