@@ -1,18 +1,18 @@
-"# projectVideotv" 
+# Website Film With MERN
 
-# Website Film With Mern
-<h1>Project Name : VIDEO TV </h1>
-<p>FrontEnd : ReactJS  with TypeScript</p>
-<p>BackEnd: NodeJs</p>
-<p>Database: MongoDB</p>
-<p><a href="https://github.com/namph2102/filmReactjs" target="_blank">Link Github Movie (FrontEnd)</a></p>
-<h2>Getting started</h2>
+## Project Name : VIDEO TV 
+
+ - FrontEnd : ReactJS  with TypeScript
+ - BackEnd: NodeJs
+ - Database: MongoDB
+ - [Link Github Movie (FrontEnd)](https://github.com/namph2102/filmReactjs) 
+### Getting started
 <hr>
 <h3>Run website</h3>
 <p>Forder movie: (git clone "https://github.com/namph2102/filmReactjs" .) -> yarn dev </p>
 <p>Forder backend: npm start</p>
 
- <h2>Description</h2>
+ ### Description
 <ul>
   <li>CRUD user, film, category, country, icon, comment</li>
     <li>Responsive</li>
@@ -29,7 +29,8 @@
   <li>Redux, Redux Toolkit, Redux Thunk</li>
 
 </ul>
-<h2>PAGE DETAILS</h2>
+
+### PAGE DETAILS
 <ul>
     <li>
         <p>HOME</p>
