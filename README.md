@@ -34,8 +34,7 @@
   - Auth
   - Redux, Redux Toolkit, Redux Thunk
 ### PAGE DETAILS
-
- 1. Home 
+   1. Home 
         <figure>
         <img src="/readme/home.png"/>
         <img src="/readme/home1.png"/>
@@ -44,18 +43,16 @@
         <img src="/readme/home4.png"/>
         <img src="/readme/home5.png"/>
         </figure>
-
     2. Film Detail
         <figure>
              <img src="/readme/filmdetail.png"/>
                  <img src="/readme/filmdetail1.png"/>
         </figure>
-
    3. Watch Film
         <figure>
-             <img src="/readme/sewwfilm.png"/>
-            <img src="/readme/seefilm1.png"/>
-             <img src="/readme/comment.png"/>
+        <img src="/readme/sewwfilm.png"/>
+         <img src="/readme/seefilm1.png"/>
+        <img src="/readme/comment.png"/>
         </figure>
     4. Page follow Countries or Categories or kind and more
         <figure>
@@ -65,11 +62,10 @@
         </figure>
     5. Profle
         <figure>
-             <img src="/readme/profile.png"/>
-            <img src="/readme/profile2.png"/>
-             <img src="/readme/profileq.png"/>
+        <img src="/readme/profile.png"/>
+        <img src="/readme/profile2.png"/>
+        <img src="/readme/profileq.png"/>
         </figure>
-  
     6. More and more Pages Let's  discover 
         ......
     7. Admin DashBoard
