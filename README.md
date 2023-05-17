@@ -6,9 +6,9 @@
  - BackEnd: NodeJs
  - Database: MongoDB
  - [Link Github Movie (FrontEnd)](https://github.com/namph2102/filmReactjs) 
-### Getting started
+## Getting started
 
-#### Run website
+## Run website
  
  1. Forder Parent git clone https://github.com/namph2102/projectVideotv .
  2. Forder movie: git clone "https://github.com/namph2102/filmReactjs"  -> yarn dev
@@ -21,7 +21,7 @@
    FISEBASE_PASSWORD="saobietduoc"
    DOMAIN = "http://localhost:3000/"<code></p>
 
- ### Description
+ ## Description
   - CRUD user, film, category, country, icon, comment
   - Responsive
   - FireBase: Login, Logout, Register (JWT)
@@ -35,8 +35,8 @@
   - Slider
   - Auth
   - Redux, Redux Toolkit, Redux Thunk
-  
-### PAGE DETAILS
+
+## PAGE DETAILS
    1. Home 
         <img src="/readme/home.png"/>
         <img src="/readme/home1.png"/>
