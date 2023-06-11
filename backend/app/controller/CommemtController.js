@@ -44,7 +44,7 @@ class CommemtController {
     } catch (err) {
       console.log(err.message);
       res
-        .status(404)
+        .status(200)
         .json({ status: 404, data: [], message: "Cant not founded" });
     }
   }

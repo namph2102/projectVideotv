@@ -3,7 +3,7 @@ const Shema = mongoose.Schema;
 const FimlModel = new Shema(
   {
     // id: number,
-    name: { type: String, required: true },
+    name: { type: String, required: true, lowercase: true },
     slug: { type: String },
     origin_name: { type: String, required: true },
     description: { type: String, required: true },
