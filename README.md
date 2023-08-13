@@ -1,5 +1,5 @@
 # Website Film With MERN
-
+## Link demo [Link demo](https://www.videotv.website/) 
 ## Project Name : VIDEO TV 
 
  - FrontEnd : ReactJS  with TypeScript
@@ -29,7 +29,7 @@
   - BookMark
   - Comment (Realtime)
   - Pagination
-  - Upload avata with Base64
+  - Upload clound
   - View Profie
   - Slider
   - Auth
